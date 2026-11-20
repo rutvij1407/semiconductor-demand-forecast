@@ -58,7 +58,7 @@ Results for the policies that matter (all 21 combinations tested are in `results
 **Limits of the simulation:**
 - The data is a production index, not real orders. One index point is treated as 1,000 units a month, which is an assumption, so compare policies with each other and do not read the absolute costs as real money.
 - The cost figures (holding, ordering, lost sale) are illustrative choices, not measured from a company.
-- The first grid I tried used lots of one month or more and gave about 100% service for every policy, so nothing was being traded off. I changed the grid to smaller lots and added negative z values so the tradeoff is visible. The grid was set before looking at which policy came out cheapest.
+- I changed the policy grid twice after seeing results. The first grid used lots of one month or more and gave about 100% service for every policy, so nothing was being traded off. I then moved to smaller lots, and after that added negative z values to find where service falls below 95%. The changes were made to make the tradeoff visible, but they were made after looking at outputs, so the chosen policy is the best of this grid and not of all possible policies.
 - Backtest errors have a mean of minus 0.032 (the forecast was a little high on average), which lowers stockouts. In the most recent window the forecast was too low, so real service could be worse than simulated.
 - Demand months are treated as independent draws, and the lead time is fixed at one month.
 
