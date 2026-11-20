@@ -1,0 +1,5 @@
+model,MAE,RMSE,MAPE,MASE,MAPE vs seasonal naive %,MAPE vs Naive %,Folds beating Naive
+SARIMA,4.998,5.992,4.096,0.8,-43.6,-5.4,5
+Prophet,5.605,6.113,4.129,0.87,-43.1,-4.6,6
+Naive,5.983,6.87,4.329,0.937,-40.4,0.0,-
+Seasonal naive (baseline),9.721,10.327,7.262,1.53,0.0,67.8,2
