@@ -25,7 +25,7 @@ FRED series [IPG3344S](https://fred.stlouisfed.org/series/IPG3344S), Industrial 
 
 ## What this says
 - SARIMA and Prophet beat seasonal naive by about 43%, but that baseline is weak here because the series is trend driven with little seasonality.
-- Against the stronger Naive baseline the gain is only about 5%, and neither model wins in most folds. This series is hard to beat with a simple model, and the honest takeaway is that the extra complexity buys a small improvement.
+- Against the stronger Naive baseline the gain is only about 5%, and SARIMA beat it in only 5 of the 10 folds and Prophet in 6 of 10, which is not a clear win. This series is hard to beat with a simple model, and the honest takeaway is that the extra complexity buys a small improvement.
 - In the last window SARIMA tracked the 2026 upswing closely, while Prophet underestimated the trend.
 
 ## Inventory simulation (Monte Carlo)
