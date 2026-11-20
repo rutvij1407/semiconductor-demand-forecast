@@ -52,7 +52,7 @@ MODELS = {"Naive": naive, "Seasonal naive (baseline)": seasonal_naive, "SARIMA":
 def main():
     df = load(); print(f"{len(df)} months, {df.ds.min():%Y-%m} to {df.ds.max():%Y-%m}")
     origins = [len(df) - H - 12 * k for k in range(N_FOLDS)][::-1]
-    rows, last = [], {}
+    rows, last, fc = [], {}, []
     for i in origins:
         train, test = df.iloc[:i], df.iloc[i:i + H]
         scale = np.mean(np.abs(train.y.to_numpy()[12:] - train.y.to_numpy()[:-12]))  # MASE scale
@@ -62,7 +62,9 @@ def main():
                              RMSE=np.sqrt((e ** 2).mean()), MAPE=np.mean(np.abs(e / test.y.to_numpy())) * 100,
                              MASE=np.abs(e).mean() / scale))
             last[name] = (test.ds.to_numpy(), f)
+            fc += [dict(origin=train.ds.iloc[-1], model=name, ds=d, actual=a, forecast=x) for d, a, x in zip(test.ds, test.y, f)]
         print("done origin", train.ds.iloc[-1].date())
+    pd.DataFrame(fc).to_csv(HERE / "results" / "backtest_forecasts.csv", index=False)
     r = pd.DataFrame(rows); r.to_csv(HERE / "results" / "backtest_by_origin.csv", index=False)
     s = r.groupby("model")[["MAE", "RMSE", "MAPE", "MASE"]].mean().sort_values("MAPE").round(3)
     base = s.loc["Seasonal naive (baseline)", "MAPE"]
